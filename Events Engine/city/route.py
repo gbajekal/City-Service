@@ -19,7 +19,7 @@ city = Blueprint('city', __name__);
 
 
 @city.route('/city', methods=["GET", "POST"])
-#@utilities.token_required
+@utilities.token_required
 #****************************************************
 # Checks whether it is a Get listing or addition
 # via forms
@@ -31,6 +31,7 @@ def cityHandler1():
         return setCity();
 
 @city.route('/city/<cityName>', methods=["PUT", "DELETE"])
+@utilities.token_required
 def cityHandler2(cityName):
     if request.method == "DELETE":
         return deleteCity(cityName)
