@@ -12,18 +12,20 @@ from utils import utilities;
 from flask import current_app as app;
 from flask_mysqldb import MySQL;
 from mysql.connector import MySQLConnection, Error
+from utils.utilities import token_required
 
 # Create a Blueprint Object
 city = Blueprint('city', __name__);
 
 
 
-@city.route('/city', methods=["GET", "POST"])
-@utilities.token_required
 #****************************************************
 # Checks whether it is a Get listing or addition
 # via forms
 #****************************************************
+
+@city.route('/city', methods=["GET", "POST"])
+@token_required
 def cityHandler1():
     if request.method == "GET":
         return getCities();
@@ -31,12 +33,12 @@ def cityHandler1():
         return setCity();
 
 @city.route('/city/<cityName>', methods=["PUT", "DELETE"])
-@utilities.token_required
+@token_required
 def cityHandler2(cityName):
     if request.method == "DELETE":
         return deleteCity(cityName)
     else:
-       return updateCity(cityName);
+        return updateCity(cityName);
 
 
 def getCities():
