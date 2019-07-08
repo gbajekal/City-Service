@@ -9,7 +9,7 @@ for both EventsNow and MeraEvents.
 
 from flask import Blueprint
 import json;
-from utils.utilities import token_required
+from app.utils.utilities import token_required
 
 
 # Create a Blueprint Object

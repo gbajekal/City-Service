@@ -6,44 +6,42 @@ for both EventsNow and MeraEvents.
 
 @author: gautam.b
 '''
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, jsonify, request, session
 import json;
-from utils import utilities;
 from flask import current_app as app;
 from flask_mysqldb import MySQL;
 from mysql.connector import MySQLConnection, Error
-from utils.utilities import token_required
+from app.utils.utilities import token_required
 
 # Create a Blueprint Object
 city = Blueprint('city', __name__);
 
 
 
-#****************************************************
-# Checks whether it is a Get listing or addition
-# via forms
-#****************************************************
-
-@city.route('/city', methods=["GET", "POST"])
-@token_required
-def cityHandler1():
-    if request.method == "GET":
-        return getCities();
-    else:
-        return setCity();
-
 @city.route('/city/<cityName>', methods=["PUT", "DELETE"])
 @token_required
 def cityHandler2(cityName):
     if request.method == "DELETE":
         return deleteCity(cityName)
-    else:
-        return updateCity(cityName);
+    return updateCity(cityName);
 
+
+#****************************************************
+# Checks whether it is a Get listing or addition
+# via forms
+#****************************************************
+@city.route('/city', methods=["GET", "POST"])
+#@token_required
+def cityHandler1():
+    if request.method == "GET":
+        return getCities();
+    return setCity();
 
 def getCities():
     msg = "In City Service";
     try:
+        username = session["username"];
+        print("Logged In user =" + username);
         cityList = [];
         mysql = app.config["DB_CONN"];
         cur = mysql.connection.cursor();
@@ -118,6 +116,7 @@ def deleteCity(cityName):
     finally:
         cur.close();
         return msg;
+    
     
     
 #***********************************************

@@ -14,11 +14,4 @@
 	<natures>
 		<nature>org.python.pydev.pythonNature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>EventsEngine</name>
-			<type>2</type>
-			<location>C:/Users/GAUTAM/Development/Events Engine</location>
-		</link>
-	</linkedResources>
 </projectDescription>

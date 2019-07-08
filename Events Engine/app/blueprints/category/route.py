@@ -5,10 +5,9 @@ Created on Jun 19, 2019
 '''
 
 
-from flask import Blueprint
-import requests as req;
+from flask import Blueprint, request
 import json;
-from utils.utilities import token_required
+from app.utils.utilities import token_required
 
 # Create a Blueprint Object
 category = Blueprint('category', __name__);
